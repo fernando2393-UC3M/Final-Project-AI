@@ -69,7 +69,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         return qvalue
     
 
-    def doValueIteration (self):
+    def doValueIteration (self): #---------------PREGUNTAR SELF---------------#
         # Write value iteration code here
 
         print "Iterations: ", self.iterations
@@ -82,6 +82,15 @@ class ValueIterationAgent(ValueEstimationAgent):
         # Your code should include the implementation of value iteration
         # At the end it should show in the terminal the number of states considered in self.values and
         # the Delta between the last two iterations
+
+	for n in range (0, self.iterations):
+		for statecount in self.mdp.getStates():
+			if self.mdp.isTerminal(statecount):
+				auxArray[statecount]=0
+			else:
+				auxArray=computeActionFromValues(self, statecount)
+		
+		self.values=auxArray		#-----------Ask what this item should return-----------#
 
         
 
@@ -178,7 +187,6 @@ class ValueIterationAgent(ValueEstimationAgent):
         else:
             # random action
             return util.random.choice(stateL.getLegalActions()) 
-
 
 
 
