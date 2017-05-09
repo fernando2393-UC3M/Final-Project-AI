@@ -142,14 +142,17 @@ class PacmanMdp(mdp.MarkovDecisionProcess):
 
         #util.raiseNotDefined()
 
-	index=self.transitionTable().index(state, action)
+	initindex=self.transitionTable().index(state, action)
+	index=self.transitionTable().index(nextstate, action)
 	
 	if(transitionTable(initindex)==0):
-		transitionTable.insert(index, ) 
+		transitionTable(initindex)=1
 
-
-	if(self.getTransitionTable.index(nextState)==0):
-		transitionTable[state][nextstate]=1
+	if(transitionTable(index)!=0):
+		transitionTable(index)++
+	
+	if(transitionTable(index)==0): #so the index does not exist
+		transitionTable(index)=1
 
         
         #"*** YOUR CODE FINISHES HERE ***"
