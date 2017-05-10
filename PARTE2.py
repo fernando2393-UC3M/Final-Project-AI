@@ -142,19 +142,15 @@ class PacmanMdp(mdp.MarkovDecisionProcess):
 
         #util.raiseNotDefined()
 
-	initindex=self.transitionTable().index(state, action)
-	index=self.transitionTable().index(nextstate, action)
-	
-	if(transitionTable(initindex)==0):
-		transitionTable(initindex)=1
+	if(self.getTransitionTable()[state, action]==0):
+		self.transitionTable[state, action]= util.Counter() #Initialization
 
-	if(transitionTable(index)!=0):
-		transitionTable(index)++
-	
-	if(transitionTable(index)==0): #so the index does not exist
-		transitionTable(index)=1
+	if(self.getTransitionTable()[state, action][nextstate]==0):
+		self.transitionTable[state, action][nextstate]=1
 
-        
+	if(self.getTransitionTable()[state, action][nextstate]!=0):
+		self.transitionTable[state, action][nextstate]+=1
+
         #"*** YOUR CODE FINISHES HERE ***"
 
     def getPossibleActions(self, state):
@@ -262,7 +258,6 @@ class PacmanMdp(mdp.MarkovDecisionProcess):
         from 'state' by taking 'action' along
         with their transition probabilities.
         """
-            
         
         if self.printMdpTable:
             self.printMdpTable=False
@@ -281,8 +276,21 @@ class PacmanMdp(mdp.MarkovDecisionProcess):
         successors = []
 
         #"*** YOUR CODE STARTS HERE ***"
+	
+	totalfreq=0
 
-        util.raiseNotDefined()
+	if(self.getTransitionTable()[state, action]==0):
+		self.transitionTable[state, action]= util.Counter() #Initialization
+ 
+	for i in self.getTransitionTable()[state, action]:
+		totalfreq+=self.getTransitionTable()[state, action][i]
+
+	for i in self.getTransitionTable()[state, action]:
+		prob=(self.getTransitionTable()[state, action][i])/totalfreq
+		successors.append((i, prob))
+
+	
+        #util.raiseNotDefined()
 
         #"*** YOUR CODE FINISHES HERE ***"
 
