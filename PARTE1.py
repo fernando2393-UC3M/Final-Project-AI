@@ -45,15 +45,7 @@ class ValueIterationAgent(ValueEstimationAgent):
 
 	total=0;
         for sprime, probability in self.mdp.getTransitionStatesAndProbabilities(state, action): #It iteracts over the list of possible states and respective probabilities
-
- 		total += probability * (self.mdp.getReward(state,action, sprime) + (self.discount*self.values[sprime]))		
-
-
-#		 discount=self.discount*self.values[sprime]
-#		 reward=self.mdp.getReward(state, action, sprime)
-#		 aux=discount+reward
-#		 aux=aux*probability
-#		 qvalue=qvalue+aux
+		total=total + probability * (self.mdp.getReward(state,action, sprime) + (self.discount*self.values[sprime]))		
 
         """
           This function is later used in doValueIteration and computeActionFromValues
